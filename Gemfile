@@ -26,6 +26,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'factory_girl_rails'
   gem 'ffaker'
+  gem 'coveralls', require: false
 end
 
 group :development do
