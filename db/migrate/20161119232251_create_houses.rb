@@ -5,6 +5,7 @@ class CreateHouses < ActiveRecord::Migration[5.0]
       t.string :code
       t.integer :capacity
       t.string :stage
+      t.references :admin
 
       t.timestamps
     end
