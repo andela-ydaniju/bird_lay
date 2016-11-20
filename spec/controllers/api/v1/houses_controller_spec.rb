@@ -31,7 +31,7 @@ RSpec.describe Api::V1::HousesController, type: :controller do
 
   context '#create' do
     let(:house) { build :house, admin_id: admin.id }
-    it 'renders a house' do
+    it 'creates a house' do
       post :create, params: {
         name: house.name , code: house.code , capacity: house.capacity,
         stage: house.stage, admin_id: admin.id
@@ -39,6 +39,33 @@ RSpec.describe Api::V1::HousesController, type: :controller do
 
       res = JSON.parse(response.body)
       expect(response).to have_http_status(201)
+    end
+
+    it 'does not create a house becuase no id' do
+      post :create, params: {
+        name: house.name , code: house.code , capacity: house.capacity,
+        stage: house.stage
+      }
+
+      expect(response).to have_http_status(422)
+    end
+
+    context '#update' do
+      before(:each) do
+        create(:house, admin_id: admin.id)
+      end
+      it 'updates a house' do
+        put :update, params: { id: House.first.id, code: 'H45YN' }
+
+        res = JSON.parse(response.body)
+        expect(res['code']).to eql('H45YN')
+      end
+
+      it 'updates a house' do
+        put :update, params: { id: House.first.id, code: 'H45YN', admin_id: 67 }
+
+        expect(response).to have_http_status(422)
+      end
     end
   end
 end

@@ -23,6 +23,17 @@ module Api
         end
       end
 
+      def update
+        house = House.find_by(id: params[:id])
+        house.update_attributes(house_params)
+
+        if house.save
+          render json: house, status: :no_content
+        else
+          render json: house.errors, status: :unprocessable_entity
+        end
+      end
+
       private
 
       def house_params
