@@ -27,6 +27,12 @@ RSpec.describe Api::V1::HousesController, type: :controller do
       expect(res.keys).to include('code')
       expect(response).to have_http_status(200)
     end
+
+    it 'does not render a house when not available' do
+      get :show, params: { id: House.first.id + 1 }
+
+      expect(response).to have_http_status(404)
+    end
   end
 
   context '#create' do
@@ -65,6 +71,23 @@ RSpec.describe Api::V1::HousesController, type: :controller do
         put :update, params: { id: House.first.id, code: 'H45YN', admin_id: 67 }
 
         expect(response).to have_http_status(422)
+      end
+    end
+
+    context '#delete' do
+      before(:each) do
+        create_list(:house, 3, admin_id: admin.id)
+      end
+      it 'deletes a house' do
+        delete :destroy, params: { id: House.first.id }
+
+        expect(House.count).to eql(2)
+      end
+
+      it 'does not deletes a house' do
+        delete :destroy, params: { id: (House.first.id + 3) }
+
+        expect(response).to have_http_status(404)
       end
     end
   end

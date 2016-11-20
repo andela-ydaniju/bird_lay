@@ -10,7 +10,11 @@ module Api
       def show
         house = House.find_by(id: params[:id])
 
-        render json: house, status: :ok
+        if house
+          render json: house, status: :ok
+        else
+          render status: :not_found
+        end
       end
 
       def create
@@ -31,6 +35,16 @@ module Api
           render json: house, status: :no_content
         else
           render json: house.errors, status: :unprocessable_entity
+        end
+      end
+
+      def destroy
+        house = House.find_by(id: params[:id])
+
+        if house && house.destroy
+          render json: house, status: :no_content
+        else
+          render status: :not_found
         end
       end
 
