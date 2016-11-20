@@ -28,4 +28,17 @@ RSpec.describe Api::V1::HousesController, type: :controller do
       expect(response).to have_http_status(200)
     end
   end
+
+  context '#create' do
+    let(:house) { build :house, admin_id: admin.id }
+    it 'renders a house' do
+      post :create, params: {
+        name: house.name , code: house.code , capacity: house.capacity,
+        stage: house.stage, admin_id: admin.id
+      }
+
+      res = JSON.parse(response.body)
+      expect(response).to have_http_status(201)
+    end
+  end
 end
