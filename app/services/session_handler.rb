@@ -20,8 +20,11 @@ module SessionHandler
   end
 
   def sign_out
-    forget(current_user)
     session.delete(:user_id)
     @current_user = nil
+  end
+
+  def login_required!
+    redirect_to root_url unless signed_in?
   end
 end
