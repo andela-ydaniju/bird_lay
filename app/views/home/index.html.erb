@@ -1,0 +1,18 @@
+<div class="general-forms">
+  <div class="form-container col-md-4 col-sm-5 col-xs-7">
+    <h3>Login</h3>
+    <%= form_for :session, url: sessions_path, html: { class: "signin card-panel" } do |f| %>
+      <div class="form-entries">
+        <%= f.email_field :email, placeholder: 'Enter your email', class: 'form-control' %>
+      </div>
+
+      <div class="form-entries">
+        <%= f.password_field :password, placeholder: 'Enter your password', class: 'form-control' %>
+      </div>
+
+      <div>
+        <%= f.submit 'Login', class: 'general-button login-btn' %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -2,7 +2,7 @@
   "name": "bird_lay",
   "description": "",
   "scripts": {
-    "postdeploy": "rake db:seed"
+    "postdeploy": "rails db:migrate && rails db:seed"
   },
   "env": {
     "LANG": {

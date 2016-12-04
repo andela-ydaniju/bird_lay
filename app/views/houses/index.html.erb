@@ -1,0 +1,28 @@
+<%= render 'layouts/header' %>
+
+<div class="container">
+  <h2>Pen Houses</h2>
+  <p>Houses and their data</p>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Code</th>
+        <th>Capacity</th>
+        <th>Population</th>
+        <th>Created By</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @houses.each do |house| %>
+      <tr>
+        <td><%= house.name %></td>
+        <td><%= house.code %></td>
+        <td><%= house.capacity %></td>
+        <td><%= house.population %></td>
+        <td><%= house.user.name %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
