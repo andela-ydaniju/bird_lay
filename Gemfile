@@ -37,10 +37,7 @@ gem 'ffaker'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'pry'
-end
-
-group :test do
-  gem 
+  gem 'rspec-rails', '~> 3.5'
 end
 
 group :development do
