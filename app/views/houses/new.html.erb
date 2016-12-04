@@ -1,15 +1,28 @@
-<div class="general-forms">
+<nav class="navbar">
+  <div><%= link_to 'Home', root_path %></div>
+  <div><%= link_to 'Sign Out', session_path(current_user.id), method: :delete %></div>
+</nav>
+
+<div class="internal-forms">
   <%= form_for @house do |f| %>
     <div>
-      <%= f.text_field :name, placeholder: 'Enter new user full name' %>
+      <%= f.text_field :name, placeholder: 'Name', class: 'form-control' %>
     </div>
 
     <div>
-      <%= f.email_field :email, placeholder: 'Enter new user email' %>
+      <%= f.text_field :code, placeholder: 'Code', class: 'form-control' %>
     </div>
 
     <div>
-      <%= f.password_field :password, placeholder: 'Choose initial password' %>
+      <%= f.text_field :capacity, placeholder: 'Capacity', class: 'form-control' %>
+    </div>
+
+    <div>
+      <%= f.text_field :population, placeholder: 'Population', class: 'form-control' %>
+    </div>
+
+    <div>
+      <%= f.text_field :feed_consumption, placeholder: 'Feed Consumption', class: 'form-control' %>
     </div>
 
     <div>
