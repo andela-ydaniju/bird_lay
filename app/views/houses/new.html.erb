@@ -1,7 +1,4 @@
-<nav class="navbar">
-  <div><%= link_to 'Home', root_path %></div>
-  <div><%= link_to 'Sign Out', session_path(current_user.id), method: :delete %></div>
-</nav>
+<%= render 'header' %>
 
 <div class="internal-forms">
   <%= form_for @house do |f| %>
