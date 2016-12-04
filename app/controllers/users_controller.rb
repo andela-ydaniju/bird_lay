@@ -7,11 +7,17 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to home_path
+      redirect_to dashboard_path
     else
       render :new
       flash[:error] = 'Error occured'
     end
+  end
+
+  def show
+    @user = User.find_by(id: params[:id])
+
+    render 'users/dashboard'
   end
 
   private

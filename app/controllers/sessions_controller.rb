@@ -7,9 +7,8 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       flash.now[:success] = "Successfully signed in"
       sign_in user
-      remember user
       session[:id] = user.id
-      redirect_to current_user
+      redirect_to dashboard_path
     else
       flash.now[:danger] = "Invalid email/password combination"
       render "new"
