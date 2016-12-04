@@ -11,19 +11,12 @@ class SessionsController < ApplicationController
       redirect_to dashboard_path
     else
       flash.now[:danger] = "Invalid email/password combination"
-      render "new"
+      render 'home/index'
     end
   end
 
   def destroy
     sign_out if signed_in?
     redirect_to root_url
-  end
-
-  private
-
-  def current_user
-    user_id = session[:user_id]
-    @current_user ||= User.find_by(id: user_id)
   end
 end

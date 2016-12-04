@@ -3,6 +3,5 @@ Rails.application.routes.draw do
 
   resources :users, except: [:show]
   resources :sessions, only: [:new, :create, :destroy]
-  get 'signin', to: 'sessions#new', as: :signin
   get 'dashboard', to: 'users#show', as: :dashboard
 end
