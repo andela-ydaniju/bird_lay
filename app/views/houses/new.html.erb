@@ -1,0 +1,19 @@
+<div class="general-forms">
+  <%= form_for @house do |f| %>
+    <div>
+      <%= f.text_field :name, placeholder: 'Enter new user full name' %>
+    </div>
+
+    <div>
+      <%= f.email_field :email, placeholder: 'Enter new user email' %>
+    </div>
+
+    <div>
+      <%= f.password_field :password, placeholder: 'Choose initial password' %>
+    </div>
+
+    <div>
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>
