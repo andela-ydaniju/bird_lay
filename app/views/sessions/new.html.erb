@@ -1,0 +1,15 @@
+<div class="general-forms">
+  <%= form_for :session, url: sessions_path, html: { class: "signin card-panel" } do |f| %>
+    <div>
+      <%= f.email_field :email, placeholder: 'Enter your email' %>
+    </div>
+
+    <div>
+      <%= f.password_field :password, placeholder: 'Enter your password' %>
+    </div>
+
+    <div>
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>
