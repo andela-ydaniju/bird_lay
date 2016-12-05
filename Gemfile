@@ -40,6 +40,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5'
   gem 'factory_girl_rails', require: false
   gem 'coveralls'
+  gem 'rails-controller-testing'
 end
 
 group :development do

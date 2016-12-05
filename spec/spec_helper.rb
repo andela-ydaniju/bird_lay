@@ -1,3 +1,4 @@
+require 'support/spec_test_helper'
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
@@ -21,6 +22,8 @@ RSpec.configure do |config|
     # `true` in RSpec 4.
     mocks.verify_partial_doubles = true
   end
+
+  config.include SpecTestHelper, type: :controller
 
   config.shared_context_metadata_behavior = :apply_to_host_groups
 end
