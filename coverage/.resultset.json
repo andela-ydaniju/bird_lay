@@ -1,0 +1,21 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/ydaniju/Documents/pps/bird_lay/app/models/user.rb": [
+        1,
+        1,
+        null,
+        1,
+        null,
+        1,
+        null
+      ],
+      "/Users/ydaniju/Documents/pps/bird_lay/app/models/application_record.rb": [
+        1,
+        1,
+        null
+      ]
+    },
+    "timestamp": 1480933080
+  }
+}
