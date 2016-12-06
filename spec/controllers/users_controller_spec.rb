@@ -41,6 +41,7 @@ RSpec.describe UsersController, type: :controller do
           post :create, params: { user: { email: new_user.email, password: new_user.password }},
           session: { user_id: user.id }
         }.to change(User, :count).by 0
+        expect(response).to render_template(:new)
       end
 
       it 'creates new user when all params correct' do
@@ -50,6 +51,26 @@ RSpec.describe UsersController, type: :controller do
           post :create, params: { user: { email: new_user.email, password: new_user.password }},
           session: { user_id: user.id }
         }.to change(User, :count).by 1
+
+        expect(response).to redirect_to(dashboard_url)
+      end
+    end
+  end
+
+  describe '#show' do
+    context 'when not signed in' do
+      it 'redirects to root' do
+        get :show, params: { id: user.id }
+
+        expect(response).to redirect_to(root_url)
+      end
+    end
+
+    context 'when signed in' do
+      it 'renders dashboard' do
+        get :show, params: { id: user.id }, session: { user_id: user.id }
+
+        expect(response).to render_template('users/dashboard')
       end
     end
   end
