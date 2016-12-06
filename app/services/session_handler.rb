@@ -14,6 +14,5 @@ module SessionHandler
 
   def login_required!
     redirect_to root_url unless signed_in?
-    flash.now[:notice] = 'You need to be signed in'
   end
 end
