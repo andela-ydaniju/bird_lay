@@ -20,6 +20,8 @@ class HousesController < ApplicationController
 
   def show
     @house = House.find_by(id: params[:id])
+
+    redirect_to '/404.html' if @house.nil?
   end
 
   private
