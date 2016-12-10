@@ -87,10 +87,13 @@ RSpec.describe HousesController, type: :controller do
 
     context 'when signed in' do
       it 'creates a new house' do
-        house.user.level = 2
-        house.save
-        
-        login(house.user)
+        new_user = User.create(
+          email: 'test@user.com',
+          password: 'password',
+          level: 2
+        )
+        new_house = build :house, user: new_user
+        login(new_user)
 
         expect {
           post :create, params: { house: {
