@@ -9,7 +9,8 @@ RSpec.describe UsersController, type: :controller do
       it 'redirects to root' do
         get :new
 
-        expect(response).to redirect_to(root_url)
+        expect(response).to have_http_status 404
+        expect(response).to render_template(file: "#{Rails.root}/public/404.html")
       end
     end
 
@@ -28,7 +29,8 @@ RSpec.describe UsersController, type: :controller do
       it 'redirects to root' do
         post :create, params: { email: new_user.email, password: new_user.password }
 
-        expect(response).to redirect_to(root_url)
+        expect(response).to have_http_status 404
+        expect(response).to render_template(file: "#{Rails.root}/public/404.html")
       end
     end
 
@@ -62,7 +64,8 @@ RSpec.describe UsersController, type: :controller do
       it 'redirects to root' do
         get :show, params: { id: user.id }
 
-        expect(response).to redirect_to(root_url)
+        expect(response).to have_http_status 404
+        expect(response).to render_template(file: "#{Rails.root}/public/404.html")
       end
     end
 

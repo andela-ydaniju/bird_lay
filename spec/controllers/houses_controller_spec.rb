@@ -9,7 +9,8 @@ RSpec.describe HousesController, type: :controller do
       it 'redirects to root' do
         get :new
 
-        expect(response).to redirect_to(root_url)
+        expect(response).to have_http_status 404
+        expect(response).to render_template(file: "#{Rails.root}/public/404.html")
       end
     end
 
@@ -28,7 +29,8 @@ RSpec.describe HousesController, type: :controller do
       it 'redirects to root' do
         get :index
 
-        expect(response).to redirect_to(root_url)
+        expect(response).to have_http_status 404
+        expect(response).to render_template(file: "#{Rails.root}/public/404.html")
       end
     end
 
@@ -47,7 +49,8 @@ RSpec.describe HousesController, type: :controller do
       it 'redirects to root' do
         get :show, params: { id: house.id }
 
-        expect(response).to redirect_to(root_url)
+        expect(response).to have_http_status 404
+        expect(response).to render_template(file: "#{Rails.root}/public/404.html")
       end
     end
 
@@ -81,7 +84,8 @@ RSpec.describe HousesController, type: :controller do
           population: new_house.population
         }
 
-        expect(response).to redirect_to(root_url)
+        expect(response).to have_http_status 404
+        expect(response).to render_template(file: "#{Rails.root}/public/404.html")
       end
     end
 
