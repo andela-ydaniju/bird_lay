@@ -15,6 +15,6 @@ module SessionHandler
   def login_required!
     return if signed_in?
 
-    render(:file => "#{Rails.root}/public/404.html", status: 404)
+    render(file: "#{Rails.root}/public/404.html", status: 404)
   end
 end

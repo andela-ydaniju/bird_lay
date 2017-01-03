@@ -25,6 +25,7 @@ class HousesController < ApplicationController
   end
 
   private
+
   def house_params
     params.require(:house).permit(
       :name, :code, :capacity, :population, :feed_consumption

@@ -99,14 +99,13 @@ RSpec.describe HousesController, type: :controller do
         new_house = build :house, user: new_user
         login(new_user)
 
-        expect {
+        expect do
           post :create, params: { house: {
             name: new_house.name, code: new_house.code,
             capacity: new_house.capacity, feed_consumption: new_house.feed_consumption,
             population: new_house.population
           } }, session: { user_id: house.user.id }
-        }.to change(House, :count).by 1
-
+        end.to change(House, :count).by 1
       end
     end
   end

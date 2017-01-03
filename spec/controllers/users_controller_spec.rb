@@ -39,20 +39,20 @@ RSpec.describe UsersController, type: :controller do
         new_user.email = nil
         login(user)
 
-        expect {
-          post :create, params: { user: { email: new_user.email, password: new_user.password }},
-          session: { user_id: user.id }
-        }.to change(User, :count).by 0
+        expect do
+          post :create, params: { user: { email: new_user.email, password: new_user.password } },
+                        session: { user_id: user.id }
+        end.to change(User, :count).by 0
         expect(response).to render_template(:new)
       end
 
       it 'creates new user when all params correct' do
         login(user)
         new_user.email = 'new@user.email'
-        expect {
-          post :create, params: { user: { email: new_user.email, password: new_user.password }},
-          session: { user_id: user.id }
-        }.to change(User, :count).by 1
+        expect do
+          post :create, params: { user: { email: new_user.email, password: new_user.password } },
+                        session: { user_id: user.id }
+        end.to change(User, :count).by 1
 
         expect(response).to redirect_to(dashboard_url)
       end
