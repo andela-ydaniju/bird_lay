@@ -11,11 +11,10 @@
 #  updated_at      :datetime         not null
 #
 
-class User < ApplicationRecord
-  validates :email, presence: true, uniqueness: true
-  validates_format_of :email, with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
+require 'rails_helper'
 
-  has_secure_password
+RSpec.describe User, type: :model do
+  subject { build :user }
 
-  has_many :houses
+  it { is_expected.to be_valid }
 end

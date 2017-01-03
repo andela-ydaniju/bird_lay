@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :houses
   get 'dashboard', to: 'users#show', as: :dashboard
+
+  get '*path', to: 'home#missing', as: :missed
 end

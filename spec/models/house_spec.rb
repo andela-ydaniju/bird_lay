@@ -13,6 +13,9 @@
 #  updated_at       :datetime         not null
 #
 
-class House < ApplicationRecord
-  belongs_to :user, -> { where(level: 2) }
+require 'rails_helper'
+RSpec.describe House, type: :model do
+  subject { build :house }
+
+  it { is_expected.to be_valid }
 end
