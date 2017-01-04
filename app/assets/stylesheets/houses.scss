@@ -22,3 +22,14 @@
     }
   }
 }
+
+.dashboard {
+  display: flex;
+  justify-content: space-between;
+
+  .user-actions {
+    background-color: yellow;
+    width: 100px;
+    height: 100px;
+  }
+}

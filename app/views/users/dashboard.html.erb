@@ -1,7 +1,8 @@
 <%= render 'layouts/header' %>
-<div>
-  <%= link_to 'Manage Houses', houses_path %>
-  <% if current_user.is_admin? %>
-  <%= link_to 'Manage Users', users_path %>
-  <% end %>
+
+<div class = 'dashboard col-md-10', id = 'dashboard'>
+  <div class='user-actions'><%= link_to 'Manage Houses', houses_path %></div>
+  <div class='user-actions'><%= link_to 'Manage Users', users_path %></div>
+  <div class='user-actions'><%= link_to 'Manage Users', users_path %></div>
+  <div class='user-actions'><%= link_to 'Manage Users', users_path %></div>
 <div>
