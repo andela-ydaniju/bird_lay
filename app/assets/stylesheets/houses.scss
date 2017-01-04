@@ -1,3 +1,35 @@
 // Place all the styles related to the Houses controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.house-nav {
+
+  ul {
+    background: #FFBF00;
+
+    .house-action {
+      background-color: green;
+      border-radius: 3px 3px 0 0;
+      color: white;
+      display: inline-block;
+      min-width: 100px;
+      text-align: center;
+      padding: 10px 5px;
+
+      &.active {
+        background-color: white;
+        color: black;
+      }
+    }
+  }
+}
+
+.dashboard {
+  display: flex;
+  justify-content: space-between;
+
+  .user-actions {
+    background-color: yellow;
+    width: 100px;
+    height: 100px;
+  }
+}

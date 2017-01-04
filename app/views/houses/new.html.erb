@@ -1,29 +1,32 @@
-<%= render 'header' %>
+<%= render 'layouts/header' %>
 
-<div class="internal-forms">
-  <%= form_for @house do |f| %>
-    <div>
-      <%= f.text_field :name, placeholder: 'Name', class: 'form-control' %>
-    </div>
+<div class="general-forms house-form">
+  <div class="form-container col-md-4 col-sm-5 col-xs-7">
+    <h3 class="">Create new user</h3>
+    <%= form_for @house, html: { class: "signin card-panel" } do |f| %>
+      <div class="form-entries">
+        <%= f.text_field :name, placeholder: 'Name', class: 'form-control' %>
+      </div>
 
-    <div>
-      <%= f.text_field :code, placeholder: 'Code', class: 'form-control' %>
-    </div>
+      <div class="form-entries">
+        <%= f.text_field :code, placeholder: 'Code', class: 'form-control' %>
+      </div>
 
-    <div>
-      <%= f.text_field :capacity, placeholder: 'Capacity', class: 'form-control' %>
-    </div>
+      <div class="form-entries">
+        <%= f.text_field :population, placeholder: 'Population', class: 'form-control' %>
+      </div>
 
-    <div>
-      <%= f.text_field :population, placeholder: 'Population', class: 'form-control' %>
-    </div>
+      <div class="form-entries">
+        <%= f.text_field :feed_consumption, placeholder: 'Feed Consumption', class: 'form-control' %>
+      </div>
 
-    <div>
-      <%= f.text_field :feed_consumption, placeholder: 'Feed Consumption', class: 'form-control' %>
-    </div>
+      <div class="form-entries">
+        <%= f.text_field :capacity, placeholder: 'Capacity', class: 'form-control' %>
+      </div>
 
-    <div>
-      <%= f.submit %>
-    </div>
-  <% end %>
+      <div>
+        <%= f.submit 'Create House', class: 'general-button' %>
+      </div>
+    <% end %>
+  </div>
 </div>
