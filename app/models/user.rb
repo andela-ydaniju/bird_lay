@@ -18,4 +18,12 @@ class User < ApplicationRecord
   has_secure_password
 
   has_many :houses
+
+  after_create :hierarchy
+
+  def hierarchy
+    return 'Admin' if self.level == 2
+    return 'Manager' if self.level == 1
+    return 'Supervisor'
+  end
 end

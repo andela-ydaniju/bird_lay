@@ -1,0 +1,31 @@
+<%= render 'layouts/header' %>
+
+<div class="container">
+  <h2>Users</h2>
+  <p>All house users</p>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Level</th>
+        <th>Population</th>
+        <th>Created By</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.hierarchy %></td>
+          <td><%=  %></td>
+          <td><%=  %></td>
+          <td><%= link_to 'details', user_path(user.id) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= link_to 'New User', new_user_path %>
+</div>
