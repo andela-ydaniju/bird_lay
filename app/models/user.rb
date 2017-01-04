@@ -19,11 +19,15 @@ class User < ApplicationRecord
 
   has_many :houses
 
-  after_create :hierarchy
+  after_create :hierarchy, :is_admin?
 
   def hierarchy
     return 'Admin' if self.level == 2
     return 'Manager' if self.level == 1
     return 'Supervisor'
+  end
+
+  def is_admin?
+    self.level == 2
   end
 end
