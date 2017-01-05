@@ -15,4 +15,5 @@
 
 class House < ApplicationRecord
   belongs_to :user, -> { where(level: 2) }
+  validates_presence_of :name
 end

@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe HousesController, type: :controller do
-  let(:house) { create :house }
   let(:new_house) { build :house }
 
   describe '#new' do
@@ -16,6 +15,7 @@ RSpec.describe HousesController, type: :controller do
 
     context 'when signed in' do
       it 'renders page for creating new house' do
+        house = create :house
         login(house.user)
         get :new, session: { user_id: house.user.id }
 
@@ -36,6 +36,7 @@ RSpec.describe HousesController, type: :controller do
 
     context 'when signed in' do
       it 'renders page for all houses' do
+        house = create :house
         login(house.user)
         get :index, session: { user_id: house.user.id }
 
@@ -47,6 +48,7 @@ RSpec.describe HousesController, type: :controller do
   describe '#show' do
     context 'when not signed in' do
       it 'redirects to root' do
+        house = create :house
         get :show, params: { id: house.id }
 
         expect(response).to have_http_status 404
@@ -57,6 +59,7 @@ RSpec.describe HousesController, type: :controller do
     context 'when signed in' do
       context 'if house exists' do
         it 'renders a house' do
+          house = create :house
           login(house.user)
           get :show, params: { id: house.id }, session: { user_id: house.user.id }
 
@@ -66,6 +69,7 @@ RSpec.describe HousesController, type: :controller do
 
       context 'if house does not exist' do
         it 'renders a house' do
+          house = create :house
           login(house.user)
           get :show, params: { id: -1 }, session: { user_id: house.user.id }
 
@@ -91,6 +95,7 @@ RSpec.describe HousesController, type: :controller do
 
     context 'when signed in' do
       it 'creates a new house' do
+        house = create :house
         new_user = User.create(
           email: 'test@user.com',
           password: 'password',
@@ -104,8 +109,31 @@ RSpec.describe HousesController, type: :controller do
             name: new_house.name, code: new_house.code,
             capacity: new_house.capacity, feed_consumption: new_house.feed_consumption,
             population: new_house.population
-          } }, session: { user_id: house.user.id }
+          } }, session: { user_id: new_house.user.id }
+
         end.to change(House, :count).by 1
+      end
+    end
+
+    context 'when signed in and params incorrect' do
+      it 'does not create a new house' do
+        house = create :house
+        new_user = User.create(
+          email: 'test@user.com',
+          password: 'password',
+          level: 2
+        )
+        new_house = build :house, name: nil, user: new_user
+        login(new_user)
+
+        expect do
+          post :create, params: { house: {
+            name: new_house.name, code: new_house.code,
+            capacity: new_house.capacity, feed_consumption: new_house.feed_consumption,
+            population: new_house.population
+          } }, session: { user_id: house.user.id }
+        end.to change(House, :count).by 0
+
       end
     end
   end
