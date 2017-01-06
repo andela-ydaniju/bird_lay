@@ -1,0 +1,2 @@
+class Mortality < ApplicationRecord
+end
