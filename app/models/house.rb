@@ -15,5 +15,7 @@
 
 class House < ApplicationRecord
   belongs_to :user, -> { where(level: 2) }
+  has_many :mortalities
+  
   validates_presence_of :name
 end
