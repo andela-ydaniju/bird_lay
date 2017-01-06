@@ -3,7 +3,7 @@ class MortalityHandler
 
   @@total_death ||= 0
 
-  def initialize(deaths: deaths, house_id: house_id)
+  def initialize(deaths, house_id)
     @deaths = deaths
     @house_id = house_id
   end
