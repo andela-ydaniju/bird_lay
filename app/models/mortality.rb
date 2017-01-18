@@ -3,4 +3,5 @@ class Mortality < ApplicationRecord
   validates :cause, length: { minimum: 50 }
 
   belongs_to :house
+  belongs_to :registrar, class_name: 'User'
 end

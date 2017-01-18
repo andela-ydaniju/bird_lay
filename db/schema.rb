@@ -30,9 +30,10 @@ ActiveRecord::Schema.define(version: 20170106051227) do
   create_table "mortalities", force: :cascade do |t|
     t.integer  "count"
     t.integer  "house_id"
+    t.integer  "registrar_id"
     t.text     "cause"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.index ["house_id"], name: "index_mortalities_on_house_id", using: :btree
   end
 

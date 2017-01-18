@@ -4,7 +4,7 @@ RSpec.describe MortalityHandler, type: :service do
   let(:house1) { create(:house, user: admin) }
   let(:house2) { create(:house, user: admin) }
 
-  describe "#initialize" do
+  describe '#initialize' do
     it 'takes two key word arguments' do
       mh = MortalityHandler.new(5, house1.id)
 
@@ -12,7 +12,7 @@ RSpec.describe MortalityHandler, type: :service do
     end
   end
 
-  describe "#remove_dead_birds" do
+  describe '#remove_dead_birds' do
     it 'returns true if dead bird successfully removed' do
       mh = MortalityHandler.new(5, house1.id)
       expect(mh.remove_dead_birds!).to eql true
@@ -24,7 +24,7 @@ RSpec.describe MortalityHandler, type: :service do
     end
   end
 
-  describe "#total_death_count" do
+  describe '#total_death_count' do
     it 'reflects all dead birds removed' do
       mh2 = MortalityHandler.new(9, house2.id)
 

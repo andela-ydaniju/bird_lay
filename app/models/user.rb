@@ -18,6 +18,7 @@ class User < ApplicationRecord
   has_secure_password
 
   has_many :houses
+  has_many :mortalities
 
   after_create :hierarchy, :is_admin?
 
