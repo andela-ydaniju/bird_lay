@@ -18,7 +18,7 @@ RSpec.describe MortalityHandler, type: :service do
       expect(mh.remove_dead_birds!).to eql true
     end
 
-    it 'returns true if dead bird successfully removed' do
+    it 'returns false if dead bird successfully removed' do
       mh = MortalityHandler.new(5, -1)
       expect(mh.remove_dead_birds!).to eql false
     end
@@ -29,7 +29,7 @@ RSpec.describe MortalityHandler, type: :service do
       mh2 = MortalityHandler.new(9, house2.id)
 
       mh2.remove_dead_birds!
-      expect(MortalityHandler.total_death_count).to eql 14
+      expect(MortalityHandler.total_death_count).to eql 19
     end
   end
 end

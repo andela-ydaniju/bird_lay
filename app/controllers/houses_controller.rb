@@ -26,16 +26,18 @@ class HousesController < ApplicationController
   end
 
   def register_mortality
+    @house = House.find_by(id: params[:mortality][:house_id])
     @mortality = Mortality.new(
-      registrar_id: current_user.id, house_id: params[:mortality][:house_id],
+      registrar_id: current_user.id, house_id: @house.id,
       count: params[:mortality][:count], cause: params[:mortality][:cause]
     )
 
     if @mortality.save
-      handler = MortalityHandler.new(@mortality.count, @mortality.house_id)
-      handler.remove_dead_birds!
-
-      redirect_to house_path(params[:mortality][:house_id])
+      handler = MortalityHandler.new(@mortality.count, @house.id)
+      if handler.remove_dead_birds!
+        @house.save
+        redirect_to house_path(params[:mortality][:house_id])
+      end
     end
   end
 

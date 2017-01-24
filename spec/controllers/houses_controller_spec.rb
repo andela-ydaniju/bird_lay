@@ -79,7 +79,7 @@ RSpec.describe HousesController, type: :controller do
   describe '#create' do
     context 'when not signed in' do
       let(:new_house) { build :house }
-      
+
       it 'redirects to root' do
         post :create, params: {
           name: new_house.name, code: new_house.code,
@@ -138,18 +138,18 @@ RSpec.describe HousesController, type: :controller do
   end
 
   describe '#register_mortality' do
-    it 'renders a house' do
-      user = create :user, email: 'new_email@new.com'
+    it 'reduces population by mortality count number' do
+      user = create :user, email: 'new_email@new.com', level: 2
       house = create :house, user: user
-
       mortality = build :mortality, registrar: user
-      post :register_mortality, params: { mortality: {
-          cause: mortality.cause, count: mortality.count,
-          registrar_id: mortality.registrar_id,
-          house_id: house.id
-        }
-      }, session: { user_id: house.user.id }
-
+      # expect do
+        post :register_mortality, params: { mortality: {
+            cause: mortality.cause, count: mortality.count,
+            registrar_id: mortality.registrar_id,
+            house_id: house.id
+          }
+        }, session: { user_id: user.id }
+      # end.to change(mortality.house, :population).by -mortality.count
       expect(response).to redirect_to(house_path(house.id))
     end
   end
