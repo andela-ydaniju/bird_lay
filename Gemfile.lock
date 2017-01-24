@@ -82,6 +82,8 @@ GEM
       rails (>= 3.1)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    groupdate (3.1.1)
+      activesupport (>= 3)
     highcharts-rails (4.2.5)
       railties (>= 3.1)
     i18n (0.7.0)
@@ -228,6 +230,7 @@ DEPENDENCIES
   factory_girl_rails
   ffaker
   flexbox-rails
+  groupdate
   highcharts-rails
   jbuilder (~> 2.5)
   jquery-rails

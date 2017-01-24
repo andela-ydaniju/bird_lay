@@ -11,4 +11,41 @@
       <li class="house-action">Settings</li>
     </ul>
   </nav>
+
+  <div class="status">
+    <div>Mortality</div>
+    <div>
+      <% if @house.mortalities.any? %>
+        <%= line_chart @house.mortalities.group_by_day(:created_at).sum(:count), discrete: true %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="mortality">
+    <div>Register New Mortality</div>
+    <div>
+      <div class="general-forms mortality-form">
+        <div class="form-container col-md-4 col-sm-5 col-xs-7">
+          <h3 class="">Record new Mortality</h3>
+          <%= form_for @mortality, url: register_mortality_houses_path, html: { class: "mortal card-panel" } do |f| %>
+
+            <%= f.hidden_field :house_id, value: @house.id %>
+            <div class="form-entries">
+              <%= f.text_field :count, placeholder: 'How many birds Died?', class: 'form-control' %>
+            </div>
+
+            <div class="form-entries">
+              <%= f.text_area :cause, placeholder: 'What is the likely cause', class: 'form-control' %>
+            </div>
+
+            <div>
+              <%= f.submit 'Record Mortality', class: 'general-button mortal-btn' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </div>

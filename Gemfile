@@ -32,6 +32,7 @@ gem 'annotate'
 gem 'ffaker'
 gem 'chartkick'
 gem 'highcharts-rails'
+gem 'groupdate'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
