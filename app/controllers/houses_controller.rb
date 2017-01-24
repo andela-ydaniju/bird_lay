@@ -32,6 +32,9 @@ class HousesController < ApplicationController
     )
 
     if @mortality.save
+      handler = MortalityHandler.new(@mortality.count, @mortality.house_id)
+      handler.remove_dead_birds!
+
       redirect_to house_path(params[:mortality][:house_id])
     end
   end

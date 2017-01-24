@@ -6,6 +6,7 @@ class MortalityHandler
   def initialize(deaths, house_id)
     @deaths = deaths
     @house_id = house_id
+
   end
 
   def remove_dead_birds!
