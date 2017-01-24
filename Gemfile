@@ -30,7 +30,9 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'flexbox-rails'
 gem 'annotate'
 gem 'ffaker'
-gem 'd3-rails'
+gem 'chartkick'
+gem 'highcharts-rails'
+gem 'groupdate'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

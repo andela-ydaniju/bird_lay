@@ -1,9 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe HousesController, type: :controller do
-  let(:house) { create :house }
-  let(:new_house) { build :house }
-
   describe '#new' do
     context 'when not signed in' do
       it 'redirects to root' do
@@ -16,7 +13,8 @@ RSpec.describe HousesController, type: :controller do
 
     context 'when signed in' do
       it 'renders page for creating new house' do
-        login(house.user)
+        house = create :house
+
         get :new, session: { user_id: house.user.id }
 
         expect(response).to render_template(:new)
@@ -36,7 +34,8 @@ RSpec.describe HousesController, type: :controller do
 
     context 'when signed in' do
       it 'renders page for all houses' do
-        login(house.user)
+        house = create :house
+
         get :index, session: { user_id: house.user.id }
 
         expect(response).to render_template(:index)
@@ -47,6 +46,7 @@ RSpec.describe HousesController, type: :controller do
   describe '#show' do
     context 'when not signed in' do
       it 'redirects to root' do
+        house = create :house
         get :show, params: { id: house.id }
 
         expect(response).to have_http_status 404
@@ -57,7 +57,7 @@ RSpec.describe HousesController, type: :controller do
     context 'when signed in' do
       context 'if house exists' do
         it 'renders a house' do
-          login(house.user)
+          house = create :house
           get :show, params: { id: house.id }, session: { user_id: house.user.id }
 
           expect(response).to render_template(:show)
@@ -66,7 +66,8 @@ RSpec.describe HousesController, type: :controller do
 
       context 'if house does not exist' do
         it 'renders a house' do
-          login(house.user)
+          house = create :house
+
           get :show, params: { id: -1 }, session: { user_id: house.user.id }
 
           expect(response).to redirect_to('/404.html')
@@ -77,6 +78,8 @@ RSpec.describe HousesController, type: :controller do
 
   describe '#create' do
     context 'when not signed in' do
+      let(:new_house) { build :house }
+
       it 'redirects to root' do
         post :create, params: {
           name: new_house.name, code: new_house.code,
@@ -91,6 +94,7 @@ RSpec.describe HousesController, type: :controller do
 
     context 'when signed in' do
       it 'creates a new house' do
+        house = create :house
         new_user = User.create(
           email: 'test@user.com',
           password: 'password',
@@ -104,9 +108,49 @@ RSpec.describe HousesController, type: :controller do
             name: new_house.name, code: new_house.code,
             capacity: new_house.capacity, feed_consumption: new_house.feed_consumption,
             population: new_house.population
-          } }, session: { user_id: house.user.id }
+          } }, session: { user_id: new_house.user.id }
+
         end.to change(House, :count).by 1
       end
+    end
+
+    context 'when signed in and params incorrect' do
+      it 'does not create a new house' do
+        house = create :house
+        new_user = User.create(
+          email: 'test@user.com',
+          password: 'password',
+          level: 2
+        )
+        new_house = build :house, name: nil, user: new_user
+        login(new_user)
+
+        expect do
+          post :create, params: { house: {
+            name: new_house.name, code: new_house.code,
+            capacity: new_house.capacity, feed_consumption: new_house.feed_consumption,
+            population: new_house.population
+          } }, session: { user_id: house.user.id }
+        end.to change(House, :count).by 0
+
+      end
+    end
+  end
+
+  describe '#register_mortality' do
+    it 'reduces population by mortality count number' do
+      user = create :user, email: 'new_email@new.com', level: 2
+      house = create :house, user: user
+      mortality = build :mortality, registrar: user
+      # expect do
+        post :register_mortality, params: { mortality: {
+            cause: mortality.cause, count: mortality.count,
+            registrar_id: mortality.registrar_id,
+            house_id: house.id
+          }
+        }, session: { user_id: user.id }
+      # end.to change(mortality.house, :population).by -mortality.count
+      expect(response).to redirect_to(house_path(house.id))
     end
   end
 end

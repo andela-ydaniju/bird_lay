@@ -3,6 +3,9 @@
 <div class="container">
   <h2>Pen Houses</h2>
   <p>Houses and their data</p>
+
+  <%= pie_chart House.group(:name).sum(:population) %>
+
   <table class="table table-striped">
     <thead>
       <tr>
@@ -26,5 +29,6 @@
       <% end %>
     </tbody>
   </table>
+
   <div> <%= link_to 'New House', new_house_path %> </div>
 </div>

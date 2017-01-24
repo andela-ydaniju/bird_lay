@@ -1,9 +1,4 @@
-user = User.create(
-  name: 'Admin',
-  email: 'admin@birdlay.com',
-  password: 'password',
-  level: 2
-)
+user = User.first
 
 4.times do
   user.houses.create(
